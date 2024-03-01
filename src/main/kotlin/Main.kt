@@ -28,7 +28,6 @@ class DemoApplication {
         teacherRepository: TeacherRepository,
         teacherSubjectRepository: TeacherSubjectRepository,
     ): CommandLineRunner {
-        val random: Random = Random()
         return CommandLineRunner { args: Array<String?>? ->
             val students = listOf(
                 Student(
