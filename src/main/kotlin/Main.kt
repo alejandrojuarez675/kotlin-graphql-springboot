@@ -15,7 +15,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 import java.time.LocalDate
-import java.util.*
 
 
 @SpringBootApplication
@@ -36,7 +35,8 @@ class DemoApplication {
                     lastname = "juarez",
                     birthdate = LocalDate.of(1994, 5, 10),
                     studentSubject = emptyList()
-                ),Student(
+                ),
+                Student(
                     id = "aaa002",
                     name = "juli",
                     lastname = "robles",
@@ -46,17 +46,27 @@ class DemoApplication {
             )
             students.forEach { studentRepository.save(it) }
 
-            val subject = Subject(
-                id = "123sdf",
-                code = "MATE1",
-                name = "Calculo en una variable",
-                studentSubjectList = emptyList(),
-                teacherSubjectList = emptyList()
+            val subjects = listOf(
+                Subject(
+                    id = "aaa003",
+                    code = "MATE1",
+                    name = "Calculo en una variable",
+                    studentSubjectList = emptyList(),
+                    teacherSubjectList = emptyList()
+                ),
+                Subject(
+                    id = "aaa034",
+                    code = "MATE2",
+                    name = "Calculo en dos variable",
+                    studentSubjectList = emptyList(),
+                    teacherSubjectList = emptyList()
+                ),
             )
-            subjectRepository.save(subject)
+            subjects.forEach { subjectRepository.save(it) }
 
-            studentSubjectRepository.save(StudentSubject("aaa001", students[0], subject))
-            studentSubjectRepository.save(StudentSubject("aaa002", students[1], subject))
+            studentSubjectRepository.save(StudentSubject("aaa001", students[0], subjects[0]))
+            studentSubjectRepository.save(StudentSubject("aaa002", students[1], subjects[0]))
+            studentSubjectRepository.save(StudentSubject("aaa003", students[0], subjects[1]))
 
             val teachers = listOf(
                 Teacher(
@@ -65,11 +75,19 @@ class DemoApplication {
                     lastname = "briguez",
                     birthdate = LocalDate.of(1982, 6, 30),
                     teacherSubject = emptyList(),
-                )
+                ),
+                Teacher(
+                    id = "aaa002",
+                    name = "juan carlos",
+                    lastname = "perez",
+                    birthdate = LocalDate.of(1962, 2, 16),
+                    teacherSubject = emptyList(),
+                ),
             )
-            teachers.forEach{ teacherRepository.save(it) }
+            teachers.forEach { teacherRepository.save(it) }
 
-            teacherSubjectRepository.save(TeacherSubject("aaa001", teachers[0], subject))
+            teacherSubjectRepository.save(TeacherSubject("aaa001", teachers[0], subjects[0]))
+            teacherSubjectRepository.save(TeacherSubject("aaa002", teachers[1], subjects[1]))
         }
     }
 }

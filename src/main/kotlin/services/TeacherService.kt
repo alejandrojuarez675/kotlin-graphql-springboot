@@ -1,17 +1,17 @@
 package com.alejua.example.services
 
-import com.alejua.example.Dto.StudentDTO
+import com.alejua.example.Dto.TeacherDTO
 import com.alejua.example.repositories.SubjectRepository
 import org.springframework.stereotype.Service
 
 @Service
-class StudentService(
+class TeacherService(
     val subjectRepository: SubjectRepository,
 ) {
-    fun findAllBySubjectCode(subjectCode: String): List<StudentDTO> =
+    fun findAllBySubjectCode(subjectCode: String): List<TeacherDTO> =
         subjectRepository.findByCode(subjectCode)
-            .map { it.studentSubjectList }
-            .map { list -> list.map { it.student } }
+            .map { it.teacherSubjectList }
+            .map { list -> list.map { it.teacher } }
             .orElse( emptyList() )
-            .map { StudentDTO.fromEntity(it) }
+            .map { TeacherDTO.fromEntity(it) }
 }
